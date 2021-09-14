@@ -6,8 +6,10 @@
 * contributor 2: `sb712 Sangwook Bok`
 
 ## Adder Design
+### Description
+We use 32 bit adder to complete addition and subtraction in alu. Inside the 32 bit CSA adder, we group four bit RCA into an adder, and use mux to choose which sum we need.
 ### Overall Architecture
-![](https://i.imgur.com/Yy2vmSa.jpg)
+![](https://i.imgur.com/Y6ZK88z.jpg)
 
 * decreased gate delay by using an xor gate to replace not gate and mux
 ### 32 bit adder
