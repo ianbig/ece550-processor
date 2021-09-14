@@ -2,10 +2,10 @@
 ###### tags: `ece550 project`
 
 ## Contributor
-* contributor 1: `cl583`
-* contributor 2: ``
+* contributor 1: `cl583 Chang Che Liu`
+* contributor 2: `sb712 Sangwook Bok`
 
-## Design
+## Adder Design
 ### Overall Architecture
 ![](https://i.imgur.com/Yy2vmSa.jpg)
 
@@ -13,12 +13,11 @@
 ### 32 bit adder
 #### the chocice between CLA and CSA
 * CSA
-    * addnmuch fater (learn from slides ***Digital Arithmetic Extra***)
-    * occupied more are (because of extra mux)
+    * add much faster (learn from slides ***Digital Arithmetic Extra***)
+    * occupied more area (because of extra mux)
 * CLA
     * occupied less area
-    * have less gate delay
-    * need to consider the fan-in fan-out issue
+    * have less gate delay, but also need to consider the fan-in fan-out issue
 #### grouped 4 bit RCA into an adder for CSA
 * it has less gate delay compare with others:
     * 2 bit adder for CSA: 34 gate delay
@@ -34,13 +33,12 @@
 
 ## Test Case
 ### Positve
-* $(2^{31} - 1) +2= \text{, overflow}$
-* $(2^{31} - 1) +2= \text{, no overflow}$
+* $(2^{31} - 1) +2= 0x80000001\text{, overflow}$
 * $100+400= 500 \text{, no overflow}$
 * $-2^{31}+(2^{31} - 1)= -1 \text{, no overflow}$
 ### Negative
-* $-2^{31} - 1= \text{, overflow}$
-* $-2^{31} + 1= \text{, no overflow}$
+* $-2^{31} - 1= 0xhfffffff\text{, overflow}$
+* $-2^{31} + 1= 0x80000001\text{, no overflow}$
 ### Zero
 * $0+(2^{31} - 1)= 2^{31} - 1 \text{, no overflow}$
 * $-2^{31} + 0= -2^{31} \text{, no overflow}$
