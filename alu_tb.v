@@ -37,8 +37,8 @@ module alu_tb();
         //checkSLL();
         //checkSRA();
 
-        //checkNE();
-        //checkLT();
+        checkNE();
+        checkLT();
         checkOverflow();
 
         if(errors == 0) begin
@@ -384,6 +384,15 @@ module alu_tb();
 
             @(negedge clock);
             if(isNotEqual !== 1'b0) begin
+                $display("**Error in isNotEqual (test 13); expected: %b, actual: %b", 1'b0, isNotEqual);
+                errors = errors + 1;
+            end
+				
+				assign data_operandA = 32'h70000000;
+            assign data_operandB = 32'h00100000;
+
+            @(negedge clock);
+            if(isNotEqual !== 1'b1) begin
                 $display("**Error in isNotEqual (test 13); expected: %b, actual: %b", 1'b0, isNotEqual);
                 errors = errors + 1;
             end

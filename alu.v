@@ -17,6 +17,6 @@ module alu(data_operandA, data_operandB, ctrl_ALUopcode, ctrl_shiftamt, data_res
 		end
 	endgenerate
 	
-	CSA_32bit csa(data_operandA, Bx, ctrl_ALUopcode[0], data_result, cout, overflow);
+	CSA_32bit csa(data_operandA, Bx, ctrl_ALUopcode[0], data_result, cout, overflow, isLessThan, isNotEqual);
 
 endmodule
