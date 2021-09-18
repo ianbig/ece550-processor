@@ -6,7 +6,7 @@ module alu(data_operandA, data_operandB, ctrl_ALUopcode, ctrl_shiftamt, data_res
    output [31:0] data_result;
    output isNotEqual, isLessThan, overflow;
 	
-	wire [31:0] Bx;
+	wire [31:0] Bx, result_CSA, result_logic;
 	wire cout; //for extendible
 	
 	genvar i;
@@ -17,6 +17,10 @@ module alu(data_operandA, data_operandB, ctrl_ALUopcode, ctrl_shiftamt, data_res
 		end
 	endgenerate
 	
-	CSA_32bit csa(data_operandA, Bx, ctrl_ALUopcode[0], data_result, cout, overflow, isLessThan, isNotEqual);
+	CSA_32bit csa(data_operandA, Bx, ctrl_ALUopcode[0], result_CSA, cout, overflow, isLessThan, isNotEqual);
+	bitwise_logic bitlog(data_operandA, data_operandB, ctrl_ALUopcode[0], result_logic);
+	
+	assign data_result = ctrl_ALUopcode[1] ? result_logic : result_CSA;
+	
 
 endmodule
