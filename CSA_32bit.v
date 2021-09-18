@@ -1,8 +1,8 @@
- module CSA_32bit(a, b, cin, sum, cout, overflow);
+ module CSA_32bit(a, b, cin, sum, cout, overflow, isLessThan, isNotEqual);
 	input [31:0] a, b;
 	input cin;
 	output [31:0] sum;
-	output cout, overflow;
+	output cout, overflow, isLessThan, isNotEqual;
 	wire [14:0] c;
 	wire [55:0] s;
 	wire [1:0] ovf;
@@ -53,6 +53,14 @@
 	mux_2to1_4bit mux13(s[51:48], s[55:52], com[5], sum[31:28]);
 	mux_2to1_1bit mux14(c[13], c[14], com[5], cout);
 	mux_2to1_1bit mux15(ovf[0], ovf[1], com[5], overflow);
+	
+	// isLessThan
+	xor(isLessThan, sum[31], overflow);
+	// isNotEqual
+	wire [29:0] tmp;
+	or(isNotEqual, sum[0], sum[1], sum[2], sum[3], sum[4], sum[5], sum[6], sum[7], sum[8], sum[9], 
+	sum[10], sum[11], sum[12], sum[13], sum[14], sum[15], sum[16], sum[17], sum[18], sum[19],
+	sum[20], sum[21], sum[22], sum[23], sum[24], sum[25], sum[26], sum[27], sum[28], sum[29], sum[30], sum[31]);
  
  endmodule
  
