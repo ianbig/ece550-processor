@@ -20,6 +20,7 @@ module alu(data_operandA, data_operandB, ctrl_ALUopcode, ctrl_shiftamt, data_res
 	CSA_32bit csa(data_operandA, Bx, ctrl_ALUopcode[0], result_CSA, cout, overflow, isLessThan, isNotEqual);
 	bitwise_logic bitlog(data_operandA, data_operandB, ctrl_ALUopcode[0], result_logic);
 	SLL_32bit sll(data_operandA, ctrl_shiftamt, result_SLL);
+	SRA_32bit sra(data_operandA, ctrl_shiftamt, result_SRA);
 	
 	assign data_result = ctrl_ALUopcode[2] ? (ctrl_ALUopcode[0] ? result_SRA : result_SLL) : (ctrl_ALUopcode[1] ? result_logic : result_CSA);
 	
