@@ -35,7 +35,7 @@ module alu_tb();
         checkAdd();
         checkSub();
         checkSLL();
-        //checkSRA();
+        checkSRA();
 
         checkNE();
         checkLT();
@@ -370,6 +370,34 @@ module alu_tb();
                 $display("**Error in SRA (test 12); expected: %h, actual: %h", 32'h00000000, data_result);
                 errors = errors + 1;
             end
+				
+				assign data_operandA = 32'h80000000;
+            assign ctrl_shiftamt = 5'b00001;
+
+            @(negedge clock);
+            if(data_result !== 32'hc0000000) begin
+                $display("**Error in SRA (test 12); expected: %h, actual: %h", 32'hc0000000, data_result);
+                errors = errors + 1;
+            end
+				
+				assign data_operandA = 32'h80000000;
+            assign ctrl_shiftamt = 5'b11111;
+
+            @(negedge clock);
+            if(data_result !== 32'hffffffff) begin
+                $display("**Error in SRA (test 12); expected: %h, actual: %h", 32'hffffffff, data_result);
+                errors = errors + 1;
+            end
+				
+				assign data_operandA = 32'h7fffffff;
+            assign ctrl_shiftamt = 5'b11111;
+
+            @(negedge clock);
+            if(data_result !== 32'h00000000) begin
+                $display("**Error in SRA (test 12); expected: %h, actual: %h", 32'h00000000, data_result);
+                errors = errors + 1;
+            end
+				
         end
     endtask
 
